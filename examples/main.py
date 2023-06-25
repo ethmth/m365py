@@ -1,6 +1,13 @@
 import time
 import json
 
+# For local library testing
+try:
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+except:
+    pass
 from m365py import m365py
 from m365py import m365message
 
@@ -17,8 +24,6 @@ try:
     scooter_mac_address = os.getenv("SCOOTER_MAC")
 except:
     pass
-
-print(scooter_mac_address)
 
 logging.getLogger('m365py').setLevel(logging.DEBUG)
 
