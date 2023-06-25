@@ -6,6 +6,20 @@ from m365py import m365message
 
 # this sets debug level of m365py
 import logging
+
+scooter_mac_address = 'D6:0E:DB:7B:EA:AB'
+try:
+    import os
+    from dotenv import load_dotenv
+
+    load_dotenv()
+
+    scooter_mac_address = os.getenv("SCOOTER_MAC")
+except:
+    pass
+
+print(scooter_mac_address)
+
 logging.getLogger('m365py').setLevel(logging.DEBUG)
 
 # callback for received messages from scooter
@@ -26,8 +40,6 @@ def connected(m365_peripheral):
 def disconnected(m365_peripheral):
     print('Scooter Disconnected')
 
-
-scooter_mac_address = 'D6:0E:DB:7B:EA:AB'
 scooter = m365py.M365(scooter_mac_address, handle_message)
 scooter.set_connected_callback(connected)
 scooter.set_disconnected_callback(disconnected)
